@@ -1,4 +1,4 @@
-name: my-portfolio
+name: my-portfolio-depployment 
 on: 
   push:
     branches: 
@@ -6,11 +6,14 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    concurrency:
+      group: deploy
+      cancel-in-progress: true
     steps:
-      - name: checkout
-        uses: actions/actions@v4
+      - name: checkout repo
+        uses: actions/checkout@v4
       - name: configure AWS credentials
-        uses: actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
