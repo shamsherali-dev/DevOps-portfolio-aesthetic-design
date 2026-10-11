@@ -16,5 +16,5 @@ jobs:
           aws-region: eu-north-1
 
       - name: Deploy file to s3 bucket
-        uses: aws s3 sync . s3: --delete 
+        run: aws s3 sync . s3://my-portfolio-s3-bkt --delete 
         
